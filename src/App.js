@@ -10,43 +10,37 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Users from "./components/Users/Users";
 import { useState } from "react";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function App() {
   const [usersArray, setUsersArray] = useState([]);
-
+  const [loggedUser, setLoggedUser] = useState(false)
   // const usersArray = [];
-
 
   return (
     <div id="body">
-      <Header></Header>
       <BrowserRouter>
+        <Header loggedUser= {loggedUser} setUsersArray={setUsersArray}></Header>
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login usersArray={usersArray} setUsersArray={setUsersArray}/>} />
-            <Route path="/signup" element={<SignUp usersArray={usersArray} setUsersArray={setUsersArray}/>} />
+            <Route
+              path="/login"
+              element={
+                <Login usersArray={usersArray} setUsersArray={setUsersArray} setLoggedUser={setLoggedUser} />
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <SignUp usersArray={usersArray} setUsersArray={setUsersArray} />
+              }
+            />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/users" element={<Users />} />
+            <Route path="/users" element={<Users usersArray={usersArray}/>} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </main>
+        <Footer></Footer>
       </BrowserRouter>
-      <Footer></Footer>
     </div>
   );
 }

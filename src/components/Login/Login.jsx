@@ -2,23 +2,27 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ usersArray, setUsersArray }) => {
+const Login = ({ usersArray, setLoggedUser }) => {
   let [name, setName] = useState("");
   let [password, setPassword] = useState("");
   const move = useNavigate();
 
   
   // const loginCredentials = usersArray.name;
-  // const checkLogIn = () => {
-  //   if (name === usersArray.name) {
-  //     move('/dashboard')
-  //   }else{
-  //     console.log("nahi mila oh nahi mila")
-  //   }
-  // }
   const checkLogIn = () => {
-  };
-
+  const validUser =  usersArray.find((user) => {
+      if(name === user.name){
+        return true;
+      }else{
+        return false;
+      }
+    })
+    if(validUser){
+      setLoggedUser(true)
+      move('/dashboard')
+    }
+  }
+ 
   return (
     <>
       <h1>Login</h1>

@@ -7,16 +7,15 @@ const SignUp = ({usersArray, setUsersArray}) => {
   let [name, setName] = useState('');
   let [password, setPassword] = useState('');
 let move = useNavigate()
-  const pushData = (evt) => {
-    let newUser = {
-      name,
-      password,
-    }
-    usersArray = [...usersArray, newUser]
-    setUsersArray(usersArray)
+const pushData = () => {
+  let newUser = {
+    name,
+    password,
+  }
+  
+  usersArray.push(newUser)
+    move('/login');
     console.log(usersArray);
-    evt.preventDefault();
-    // move('/login');
   }
 
 
